@@ -19,7 +19,7 @@
     <br>
     <div class="form-row text-center">
         <div class="col-12">
-            <img class="img-fluid" src="/img/1.jpg" class="rounded">
+            <img class="img-fluid img-thumbnail" src="/img/1.jpg">
 
 
             <br><br>
