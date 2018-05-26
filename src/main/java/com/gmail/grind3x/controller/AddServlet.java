@@ -14,13 +14,8 @@ import java.io.IOException;
 
 @WebServlet("/add")
 public class AddServlet extends HttpServlet {
-    EntityManagerFactory entityManagerFactory;
+    EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("JPATest");
     EntityManager entityManager;
-
-    @Override
-    public void init() throws ServletException {
-        entityManagerFactory = Persistence.createEntityManagerFactory("JPATest");
-    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

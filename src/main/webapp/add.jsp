@@ -43,7 +43,7 @@
             <textarea name="text" class="form-control" id="text"></textarea>
         </div>
         <button type="submit" class="btn btn-success">Submit</button>
-        <a href="javascript:history.back()">
+        <a href="/">
             <button type="button" class="btn btn-primary">Go back</button>
         </a>
     </form>
