@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" import="com.gmail.grind3x.model.Advertisement" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,6 +20,7 @@
         <tr>
             <th>Author</th>
             <th>Title</th>
+            <th>Date</th>
             <th>Text</th>
         </tr>
         </thead>
@@ -27,10 +28,13 @@
         <c:forEach items="${advertisements}" var="advertisement">
             <tr>
                 <td>
-                    <c:out value="${advertisement.getAuthor()}"></c:out>
+                    <a href="view?author=${advertisement.getAuthor().getName()}"><c:out value="${advertisement.getAuthor().getName()}"></c:out></a>
                 </td>
                 <td>
                     <c:out value="${advertisement.getTitle()}"></c:out>
+                </td>
+                <td>
+                    <c:out value="${advertisement.getCreateDate()}"></c:out>
                 </td>
                 <td>
                     <c:out value="${advertisement.getText()}"></c:out>
@@ -39,7 +43,7 @@
         </c:forEach>
         </tbody>
     </table>
-    <a href="/">
+    <a href="javascript:history.back()">
         <button type="button" class="btn btn-primary ">Go back</button>
     </a><br><br>
 

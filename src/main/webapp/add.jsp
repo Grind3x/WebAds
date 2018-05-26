@@ -38,16 +38,14 @@
             <label for="title">Title:</label>
             <input type="text" class="form-control" id="title" name="title">
         </div>
-
         <div class="form-group">
             <label for="text">Text:</label>
             <textarea name="text" class="form-control" id="text"></textarea>
         </div>
         <button type="submit" class="btn btn-success">Submit</button>
-        <a href="/">
+        <a href="javascript:history.back()">
             <button type="button" class="btn btn-primary">Go back</button>
         </a>
-
     </form>
 </div>
 </body>

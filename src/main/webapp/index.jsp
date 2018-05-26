@@ -20,8 +20,6 @@
     <div class="form-row text-center">
         <div class="col-12">
             <img class="img-fluid img-thumbnail" src="/img/1.jpg">
-
-
             <br><br>
             <a href="add.jsp" style="text-align:center">
                 <button type="button" class="btn btn-outline-success btn align-middle">Add advertisement</button>
@@ -31,8 +29,6 @@
             </a>
         </div>
     </div>
-
-
 </div>
 </body>
 </html>
