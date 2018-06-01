@@ -12,6 +12,7 @@ public interface AdvertisementDAO {
     void delete(Advertisement advertisement);
 
     List<Advertisement> findByAuthor(String name);
+
     Advertisement findById(Long id);
 
     void update(Advertisement advertisement);

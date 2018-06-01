@@ -15,8 +15,8 @@ public class Image {
     @Column(nullable = false)
     private String path;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "image")
-    private Advertisement advertisement;
+//    @OneToOne(fetch = FetchType.LAZY, mappedBy = "image")
+//    private Advertisement advertisement;
 
     public Image() {
     }
@@ -24,7 +24,7 @@ public class Image {
     public Image(String name, String path) {
         this.name = name;
         this.path = path;
-        this.advertisement = null;
+//        this.advertisement = null;
     }
 
     public Long getId() {
@@ -47,13 +47,40 @@ public class Image {
         this.path = path;
     }
 
-    public Advertisement getAdvertisement() {
-        return advertisement;
-    }
+//    public Advertisement getAdvertisement() {
+//        return advertisement;
+//    }
 
-    public void setAdvertisement(Advertisement advertisement) {
-        this.advertisement = advertisement;
-    }
+//    public void setAdvertisement(Advertisement advertisement) {
+//        this.advertisement = advertisement;
+//    }
+
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        Image image = (Image) o;
+//        return Objects.equals(name, image.name) &&
+//                Objects.equals(path, image.path) &&
+//                Objects.equals(advertisement, image.advertisement);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//
+//        return Objects.hash(name, path, advertisement);
+//    }
+//
+//    @Override
+//    public String toString() {
+//        return "Image{" +
+//                "id=" + id +
+//                ", name='" + name + '\'' +
+//                ", path='" + path + '\'' +
+//                ", advertisement=" + advertisement +
+//                '}';
+//    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -61,14 +88,13 @@ public class Image {
         if (o == null || getClass() != o.getClass()) return false;
         Image image = (Image) o;
         return Objects.equals(name, image.name) &&
-                Objects.equals(path, image.path) &&
-                Objects.equals(advertisement, image.advertisement);
+                Objects.equals(path, image.path);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(name, path, advertisement);
+        return Objects.hash(name, path);
     }
 
     @Override
@@ -77,7 +103,6 @@ public class Image {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", path='" + path + '\'' +
-                ", advertisement=" + advertisement +
                 '}';
     }
 }
