@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Home page</title>
+    <title>Advertisements service - ${advertisement.getTitle()}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
@@ -16,8 +16,8 @@
 
     .thumbnail {
         position: relative;
-        width: 100px;
-        height: 100px;
+        width: 250px;
+        height: 250px;
         overflow: hidden;
     }
 
@@ -45,14 +45,17 @@
     <br>
     <div class="form-row text-center">
         <div class="col12">
-            <img class="img-fluid img-thumbnail" src="/img/1.jpg">
             <br><br>
-            <a href="add.jsp" style="text-align:center">
-                <button type="button" class="btn btn-outline-success btn align-middle">Add advertisement</button>
-            </a>
-            <a href="view" style="text-align:center">
-                <button type="button" class="btn btn-outline-primary btn align-middle">List all advertisements</button>
-            </a>
+            <div class="thumbnail">
+                <img src="${advertisement.getImage().getPath()}${advertisement.getImage().getName()}"
+                     alt="Image"/>
+            </div><br>
+            Title: ${advertisement.getTitle()}<br>
+            Id: ${advertisement.getId()}<br>
+            Author: ${advertisement.getAuthor().getName()}<br>
+            Text: ${advertisement.getText()}<br>
+
+
         </div>
     </div>
 </div>

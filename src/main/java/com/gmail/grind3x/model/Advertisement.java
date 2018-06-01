@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name="Advertisements")
+@Table(name = "Advertisements")
 public class Advertisement {
 
     @Id
@@ -13,23 +13,32 @@ public class Advertisement {
     private Long id;
     @Column(nullable = false)
     private String title;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 1000)
     private String text;
     @Column(nullable = false)
     private Date createDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "author_id")
+    @JoinColumn(name = "author_id", nullable = false)
     private Author author;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "image_id")
+    private Image image;
 
     public Advertisement() {
     }
 
-    public Advertisement(String title, String text, Author author) {
+    public Advertisement(String title, String text, Author author, Image image) {
         this.title = title;
         this.text = text;
-        this.createDate = new Date();
         this.author = author;
+        this.image = image;
+        createDate = new Date();
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getTitle() {
@@ -48,17 +57,28 @@ public class Advertisement {
         this.text = text;
     }
 
-    public Author getAuthor() {
-        return author;
-    }
-
     public Date getCreateDate() {
         return createDate;
     }
 
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public Author getAuthor() {
+        return author;
+    }
 
     public void setAuthor(Author author) {
         this.author = author;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
     }
 
     @Override
@@ -69,13 +89,14 @@ public class Advertisement {
         return Objects.equals(title, that.title) &&
                 Objects.equals(text, that.text) &&
                 Objects.equals(createDate, that.createDate) &&
-                Objects.equals(author, that.author);
+                Objects.equals(author, that.author) &&
+                Objects.equals(image, that.image);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(title, text, createDate, author);
+        return Objects.hash(title, text, createDate, author, image);
     }
 
     @Override
@@ -86,6 +107,7 @@ public class Advertisement {
                 ", text='" + text + '\'' +
                 ", createDate=" + createDate +
                 ", author=" + author +
+                ", image=" + image +
                 '}';
     }
 }

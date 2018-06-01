@@ -13,6 +13,11 @@ public class Author {
     @Column(nullable = false)
     private String name;
 
+    @Column
+    private String email;
+
+    @Column
+    private String phone;
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
     private List<Advertisement> advertisements = new ArrayList<>();

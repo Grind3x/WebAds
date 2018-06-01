@@ -29,7 +29,7 @@
         </div>
     </c:if>
 
-    <form action="/add" method="post">
+    <form action="/add" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="author">Author:</label>
             <input type="text" class="form-control" id="author" name="author">
@@ -41,6 +41,10 @@
         <div class="form-group">
             <label for="text">Text:</label>
             <textarea name="text" class="form-control" id="text"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="image">Image:</label>
+            <input class="form-control" type="file" name="image" value="" id="image" accept=".jpg, .jpeg, .png">
         </div>
         <button type="submit" class="btn btn-success">Submit</button>
         <a href="/">
