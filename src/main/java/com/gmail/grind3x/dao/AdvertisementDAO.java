@@ -1,6 +1,7 @@
 package com.gmail.grind3x.dao;
 
 import com.gmail.grind3x.model.Advertisement;
+import com.gmail.grind3x.model.Category;
 
 import java.util.List;
 
@@ -16,4 +17,6 @@ public interface AdvertisementDAO {
     Advertisement findById(Long id);
 
     void update(Advertisement advertisement);
+
+    List<Advertisement> findByCategory(Category category);
 }

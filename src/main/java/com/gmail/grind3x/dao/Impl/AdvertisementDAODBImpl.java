@@ -3,6 +3,7 @@ package com.gmail.grind3x.dao.Impl;
 import com.gmail.grind3x.dao.AdvertisementDAO;
 import com.gmail.grind3x.dao.PostgresDAOFactory;
 import com.gmail.grind3x.model.Advertisement;
+import com.gmail.grind3x.model.Category;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -47,7 +48,7 @@ public class AdvertisementDAODBImpl implements AdvertisementDAO {
     public List<Advertisement> findByAuthor(String name) {
         List<Advertisement> list = null;
         try {
-            Query query = em.createQuery("SELECT a FROM Advertisement a WHERE a.author = :name", Advertisement.class);
+            Query query = em.createQuery("SELECT a FROM Advertisement a WHERE a.author.name = :name", Advertisement.class);
             query.setParameter("name", name);
             list = query.getResultList();
         } catch (NoResultException e) {
@@ -74,5 +75,18 @@ public class AdvertisementDAODBImpl implements AdvertisementDAO {
         em.getTransaction().begin();
         em.refresh(advertisement);
         em.getTransaction().commit();
+    }
+
+    @Override
+    public List<Advertisement> findByCategory(Category category) {
+        List<Advertisement> list = null;
+        try {
+            Query query = em.createQuery("SELECT a FROM Advertisement a WHERE a.category = :name", Advertisement.class);
+            query.setParameter("name", category);
+            list = query.getResultList();
+        } catch (NoResultException e) {
+            return null;
+        }
+        return list;
     }
 }

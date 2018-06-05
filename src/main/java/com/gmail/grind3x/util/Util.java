@@ -26,6 +26,9 @@ public class Util {
         for (FileItem item : items) {
             if (!item.isFormField()) {
                 try {
+                    if (item.getSize() == 0) {
+                        return null;
+                    }
                     name = item.hashCode() + item.getName();
                     item.write(new File(abs + item.hashCode() + item.getName()));
                     image = new Image(name, relet);

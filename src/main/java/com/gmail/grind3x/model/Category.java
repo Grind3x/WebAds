@@ -1,19 +1,24 @@
 package com.gmail.grind3x.model;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
 public class Category {
     @Id
+    @GeneratedValue
     private Long id;
 
-    @Column(nullable = false, length = 25)
+    @Column(nullable = false, length = 150)
     private String name;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "image_id")
     private Image image;
+
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    private List<Advertisement> advertisements;
 
     public Category() {
     }
@@ -41,6 +46,15 @@ public class Category {
 
     public void setImage(Image image) {
         this.image = image;
+    }
+
+    public List<Advertisement> getAdvertisements() {
+        return advertisements;
+    }
+
+    public void addAdvertisement(Advertisement advertisement) {
+        advertisement.setCategory(this);
+        advertisements.add(advertisement);
     }
 
     @Override

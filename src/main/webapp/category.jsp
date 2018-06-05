@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>${author.getName()}</title>
+    <title>${category.getName()}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
@@ -18,11 +18,27 @@
 
     .thumbnail {
         position: relative;
+        width: 40px;
+        height: 40px;
+        overflow: hidden;
+    }
+    .thumbnail-adv {
+        position: relative;
         width: 150px;
         height: 150px;
         overflow: hidden;
     }
 
+    .thumbnail-adv img {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        height: 100%;
+        width: auto;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
     .thumbnail img {
         position: absolute;
         left: 50%;
@@ -33,12 +49,15 @@
         -ms-transform: translate(-50%, -50%);
         transform: translate(-50%, -50%);
     }
+    .thumbnail-adv img.portrait {
+        width: 100%;
+        height: auto;
+    }
 
     .thumbnail img.portrait {
         width: 100%;
         height: auto;
     }
-
 </style>
 <body>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -54,14 +73,14 @@
     </ul>
 </nav>
 <div class="container">
-    <h2 class="text-primary" style="text-align:center">${author.getName()} advertisements:</h2>
+    <h2 class="text-primary" style="text-align:center"><c:out value="${category.getName()}"></c:out></h2>
     <br>
     <c:forEach items="${advertisements}" var="advertisement">
         <table class="table">
             <tbody>
             <tr>
                 <td rowspan="5" width="20%">
-                    <div class="thumbnail">
+                    <div class="thumbnail-adv">
                         <img src="${advertisement.getImage().getPath()}${advertisement.getImage().getName()}"
                              alt="Image"/>
                     </div>
@@ -96,7 +115,6 @@
             </tbody>
         </table>
     </c:forEach>
-    <br>
     <a href="javascript:history.back()">
         <button type="button" class="btn btn-primary ">Go back</button>
     </a><br><br>

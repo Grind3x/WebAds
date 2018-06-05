@@ -2,10 +2,12 @@ package com.gmail.grind3x.controller;
 
 import com.gmail.grind3x.dao.AdvertisementDAO;
 import com.gmail.grind3x.dao.AuthorDAO;
+import com.gmail.grind3x.dao.CategoryDAO;
 import com.gmail.grind3x.dao.ImageDAO;
 import com.gmail.grind3x.dao.PostgresDAOFactory;
 import com.gmail.grind3x.model.Advertisement;
 import com.gmail.grind3x.model.Author;
+import com.gmail.grind3x.model.Category;
 import com.gmail.grind3x.model.Image;
 import com.gmail.grind3x.util.Util;
 import org.apache.commons.fileupload.FileItem;
@@ -32,25 +34,32 @@ public class AddServlet extends HttpServlet {
         AuthorDAO authorDAO = daoFactory.getAuthorDAO();
         ImageDAO imageDAO = daoFactory.getImageDAO();
         AdvertisementDAO advertisementDAO = daoFactory.getAdvertisementDAO();
+        CategoryDAO categoryDAO = daoFactory.getCategoryDAO();
 
         String authorName = "";
         String title = "";
         String text = "";
+        String shortText = "";
         Image image = null;
+        Long categoryId = -1L;
+        Category category = null;
         FileItemFactory fileItemFactory = new DiskFileItemFactory();
         ServletFileUpload servletFileUpload = new ServletFileUpload(fileItemFactory);
         List<FileItem> items = null;
+        Integer cost = 0;
         try {
             items = servletFileUpload.parseRequest(req);
             authorName = Util.parseItem("author", items);
             title = Util.parseItem("title", items);
             text = Util.parseItem("text", items);
+            categoryId = Long.valueOf(Util.parseItem("category", items));
+            shortText = Util.parseItem("short_text", items);
             String path = "/img/";
             image = Util.getImage(items, getServletContext().getRealPath(path), path);
-        } catch (FileUploadException e) {
-            e.printStackTrace();
+            cost = Integer.valueOf(Util.parseItem("cost", items));
+        } catch (FileUploadException | NullPointerException | NumberFormatException e) {
         }
-        if (!"".equals(authorName) && !"".equals(authorName) && !"".equals(text) && image != null) {
+        if (!"".equals(authorName) && !"".equals(title) && !"".equals(text) && image != null && !"".equals(shortText)) {
             imageDAO.insertImage(image);
             Author author = null;
 
@@ -58,7 +67,8 @@ public class AddServlet extends HttpServlet {
                 author = new Author(authorName);
                 authorDAO.insertAuthor(author);
             }
-            advertisementDAO.insert(new Advertisement(title, text, author, image));
+            category = categoryDAO.findById(categoryId);
+            advertisementDAO.insert(new Advertisement(title, shortText, text, author, image, category, cost));
             req.setAttribute("success_message", "Advertisement success added!");
             RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/add.jsp");
             requestDispatcher.forward(req, resp);
